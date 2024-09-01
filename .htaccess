@@ -1,0 +1,6 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} ^(www\.)?wesleyproctorenterprise\.com$ [NC]
+RewriteRule ^(.*)$ https://wesleyproctorenterprise.com/$1 [L,R=301]
+</IfModule>
