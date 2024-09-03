@@ -194,25 +194,44 @@ require 'phpMailer/SMTP.php';
         <h2>Workshops/Trainings QUESTIONNAIRE</h2>
         <p>Please provide the following information:</p>
     </div>
-              <form action="" method="post" id="form">
-              <label for="text">1. Please provide your email.</label><br>
-           <input type="email" name="email" id="text" required> <br><br>
-               <label for="date">2. Date of Event?</label><br>
-               <input type="date" name="date" id="date"><br><br>
-               <label for="text-1">3. How long would you like for Dr. Proctor to speak?</label><br>
-               <input type="text" name="speak" id="text-1"> <br><br>
-               <label
-                for="text-2">4.What topic would you like Dr. Proctor to speak on?</label><br>
-               <input type="text" name="topic" id="text-2"> <br><br>
-               <label for="text-3">5.How many people will be attending?</label><br>
-               <input type="text" name="attending" id="text-3"><br><br>
-               <label for="text-5">6. Does it cost a fee to attend this event?</label><br>
-               <input type="radio" name="cost" id="yes" value="Yes" checked><label for="yes">Yes</label><br>
-               <input type="radio" name="cost" id="no" value="No"><label for="no">No</label><br><br>
-               <label for="text-6">7. Is there any other information you wish to provide?</label><br>
-               <input type="text" name="information" id="text-6"> <br><br>
-               <input type="submit" name="submit" value="Submit" id="submit">
-          </form>
+    <form action="" method="post" id="form">
+    <label for="name">1. Please provide your name.</label><br>
+    <input type="text" name="name" id="name" required><br><br>
+
+    <label for="business_name">2. Please provide your business name.</label><br>
+    <input type="text" name="business_name" id="business_name"><br><br>
+
+    <label for="email">3. Please provide your email.</label><br>
+    <input type="email" name="email" id="email" required><br><br>
+
+    <label for="date">4. Date of Event?</label><br>
+    <input type="date" name="date" id="date"><br><br>
+
+    <label for="speak">5. How long would you like for Dr. Proctor to speak?</label><br>
+    <input type="text" name="speak" id="speak"><br><br>
+
+    <label for="topic">6. What topic would you like Dr. Proctor to speak on?</label><br>
+    <select name="topic" id="topic">
+        <option value="Leadership">Leadership</option>
+        <option value="Motivation">Motivation</option>
+        <option value="Team Building">Team Building</option>
+        <option value="Overcoming Challenges">Overcoming Challenges</option>
+        <option value="Innovation">Innovation</option>
+    </select><br><br>
+
+    <label for="attending">7. How many people will be attending?</label><br>
+    <input type="text" name="attending" id="attending"><br><br>
+
+    <label for="cost">8. Does it cost a fee to attend this event?</label><br>
+    <input type="radio" name="cost" id="yes" value="Yes" checked><label for="yes">Yes</label><br>
+    <input type="radio" name="cost" id="no" value="No"><label for="no">No</label><br><br>
+
+    <label for="information">9. Is there any other information you wish to provide?</label><br>
+    <input type="text" name="information" id="information"><br><br>
+
+    <input type="submit" name="submit" value="Submit" id="submit">
+</form>
+
     
 </div>
 </div>

@@ -178,18 +178,34 @@ require 'phpMailer/SMTP.php';
         <p>Please provide the following information:</p>
     </div>
     <form action="" method="post">
-         <label for="text">1. Please provide your email.</label><br>
-           <input type="email" name="email" id="text" required> <br><br>
-           <label for="text-2">2. Please provide your phone number.</label><br>
-           <input type="phone" name="phone" id="text-2"> <br><br> 
-         <label for="text-3">3. Please provide any information that would help you prepare for our meeting. </label><br>
-         <input type="text" name="our_meeting" id="text-3">         
-         <label for="text-4">4. Is this a consultation or coaching session?</label><br>
-         <input type="text" name="coaching_session" id="text-4"> <br><br>
-         <label for="text-5">5. Will your session be 30 minutes or 60 minutes?</label><br>
-         <input type="text" name="session" id="text-5"> <br><br>
-         <input type="submit" name="submit" value="Submit" id="submit">
-    </form>
+    <label for="text">1. Please provide your name.</label><br>
+    <input type="text" name="name" id="text" required><br><br>
+    
+    <label for="text-2">2. Please provide your business name.</label><br>
+    <input type="text" name="business_name" id="text-2"><br><br>
+    
+    <label for="text-3">3. Please provide your email.</label><br>
+    <input type="email" name="email" id="text-3" required><br><br>
+    
+    <label for="text-4">4. Please provide your phone number.</label><br>
+    <input type="tel" name="phone" id="text-4"><br><br>
+    
+    <label for="text-5">5. Is this a consultation or coaching session?</label><br>
+    <input type="text" name="coaching_session" id="text-5"><br><br>
+    
+    <label for="text-6">6. Please provide any information that would help you prepare for our meeting.</label><br>
+    <input type="text" name="our_meeting" id="text-6"><br><br>
+    
+    <label for="text-7">7. Will your session be 30 minutes or 60 minutes?</label><br>
+    <input type="radio" name="session" id="30_minutes" value="30 minutes">
+    <label for="30_minutes">30 minutes</label><br>
+    <input type="radio" name="session" id="60_minutes" value="60 minutes">
+    <label for="60_minutes">60 minutes</label><br><br>
+    
+    <input type="submit" name="submit" value="Submit" id="submit">
+</form>
+
+
     
 </div>
 </div>
