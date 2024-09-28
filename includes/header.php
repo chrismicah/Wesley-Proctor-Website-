@@ -11,7 +11,7 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse-uarr">
           <ul class="nav navbar-nav navbar-right">
-            <li><a class="active" href="index.html" title="">Home</a></li>
+            <li><a class="active" href="index.php" title="">Home</a></li>
             <li><a href="about.php" title="">About Dr. Proctor</a></li>
             <li class="dropdown">
               <a class="dropbtn">Services</a>
@@ -29,10 +29,10 @@
                 <a href="workshop-seminar-training-form.php">Workshop/Seminar Training</a>
               </div>
             </li>
-            <li><a href="payment.html">Payment</a></li>
-            <li><a href="calendar.html" title="">Calendar</a></li>
-            <li><a href="courses-trainings.html" title="">Courses/Training</a></li>
-            <li><a href="products.html">Products</a></li>
+            <li><a href="payment.php">Payment</a></li>
+            <li><a href="calendar.php" title="">Calendar</a></li>
+            <li><a href="courses-trainings.php" title="">Courses/Training</a></li>
+            <li><a href="products.php">Products</a></li>
           </ul>
         </div>
       </div>
