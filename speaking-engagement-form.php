@@ -113,7 +113,7 @@ require 'phpMailer/SMTP.php';
 
   <title>W.P. Enterprise</title>  
 
-<link href="./main.a3f694c0.css" rel="stylesheet">
+<link href="css/main.a3f694c0.css" rel="stylesheet">
 <style>
     #submit{
     width:150px ;
@@ -127,51 +127,8 @@ require 'phpMailer/SMTP.php';
 <body>
 
  <!-- Add your content of header -->
- <header>
-    <nav class="navbar  navbar-fixed-top navbar-default">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle uarr collapsed" data-toggle="collapse" data-target="#navbar-collapse-uarr">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="./index.html" title="">
-            <img src="./assets/images/WPE Logo _new - Copy.jpeg" class="navbar-logo-img" alt="">
-          </a>
-        </div>
-  
-        <div class="collapse navbar-collapse" id="navbar-collapse-uarr">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="./index.html" title="" class="active">Home</a></li>          
-            <li><a href="./about.html" title=""> About Dr. Proctor</a></li>
-            <li class="dropdown">
-              <a class="dropbtn">Services</a>
-              <div class="dropdown-content">
-                <a href="./Nonprofit-Formation-Incorporation.php">Nonprofit Formation/Incorporation</a>
-                <a href="./For-profit-Business-Formation.php">For-profit Business Formation</a>
-                <a href="./Consultation-Coaching.php">Consultation/Coaching</a>
-                <a href="./Workshops-Trainings.php">Workshops/Trainings</a>
-              </div>
-            </li>
-            <li class="dropdown">
-              <a class="dropbtn">Book Dr. Proctor </a>
-              <div class="dropdown-content">
-                  <a href="./speaking-engagement-form.php">Speaking Engagement</a>
-                  <a href="./workshop-seminar-training-form.php">Workshop/Seminar Training</a>
-                </div>
-            </li>
-            <li><a href="./payment.html">Payment</a></li>
-            <li><a href="./calendar.html" title="">Calendar</a></li>
-            <li><a href="./courses-trainings.html" title="">Courses/Training</a></li>
-              </li>
-              <li><a href="./products.html">Products</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
+ <?php include_once "includes/header.php";	 ?>
+
   <main class="form-bg">
       <?php echo $output; ?>
    
@@ -224,45 +181,8 @@ require 'phpMailer/SMTP.php';
   </main>
 
   
-<footer>
-    <div class="section-container footer-container">
-        <div class="container">
-            <div class="row">
-                    <div class="col-md-4">
-                        <h4>Follow Us!</h4>
-                        <p><b id="docs-internal-guid-62ef645a-7fff-2554-0f63-2fddd702e798"><a href="https://www.instagram.com/drwesleyproctor/?igshid=NDRkN2NkYzU%3D"><img style="height: 50px; width: 50px; " src="./logo-ig-png-32473.png"></a></b></p>
-                    </div>
+  <?php include_once "includes/footer.php";	 ?>
 
-                    <div class="col-md-4">
-                        <h4>Contact Us</h4>
-                        <p>
-                        <p>Phone:<a style="color: blue;" href="tel:5554280940">484-836-6444</a></p>
-
-                        <p>Email:<a style="color: blue;" href="mailto:wesleyproctorenterprise@gmail.com">wesleyproctorenterprise@gmail.com</a></p>
-
-                        <p></p>
-                          </a>
-                        </p>
-                    </div>
-
-                    <div class="col-md-4">
-                        <h4>Subscribe to newsletter</h4>
-                        
-                        <div class="form-group">
-                            <div class="input-group">
-                                <input type="text" class="form-control footer-input-text">
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-primary btn-newsletter ">OK</button>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-            </div>
-        </div>
-    </div>
-</footer>
 
 <script>
   document.addEventListener("DOMContentLoaded", function (event) {
@@ -290,7 +210,7 @@ if(window.history.replaceState){
 
 -->
 
-<script type="text/javascript" src="./main.41beeca9.js"></script></body>
+<script type="text/javascript" src="js/main.41beeca9.js"></script></body>
 
 </html>
 
