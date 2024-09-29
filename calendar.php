@@ -1,3 +1,7 @@
+<?php
+include_once("config.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +19,7 @@
   <link href="./assets/apple-touch-icon.png" rel="apple-touch-icon">
   <link href="./assets/favicon.ico" rel="icon">
   <link href="css/main.a3f694c0.css" rel="stylesheet">
+  <link href="css/custom.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap-grid.min.css"
     integrity="sha512-i1b/nzkVo97VN5WbEtaPebBG8REvjWeqNclJ6AItj7msdVcaveKrlIIByDpvjk5nwHjXkIqGZscVxOrTb9tsMA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -85,82 +90,74 @@
   <!-- Add your content of header -->
   <?php include_once "includes/header.php"; ?>
 
+  <?php
+
+
+  // Fetch upcoming events including today's
+  $sql = "SELECT * FROM `events` WHERE `event_date` >= CURDATE() ORDER BY `event_date` ASC";
+  $result = mysqli_query($conn, $sql);
+  ?>
+
+  <?php
+
+  // Fetch upcoming events including today's
+  $sql = "SELECT * FROM `events` WHERE `event_date` >= CURDATE() ORDER BY `event_date` ASC";
+  $result = mysqli_query($conn, $sql);
+  ?>
+
   <main>
     <h1 class="text-center mb-5">Upcoming Events</h1>
     <div class="row">
       <div class="col-md-8 mx-auto">
-        <div class="event-card">
-          <div class="row g-0">
-            <div class="col-md-3 col-sm-4">
-              <div class="event-date d-flex align-items-center justify-content-center h-100">
-                <div>
-                  <div class="fs-2 ">15</div>
-                  <div class="fs-2" >MAY</div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-9 col-sm-8">
-              <div class="event-info">
-                <h2 class="event-title">Tech Conference 2024</h2>
-                <p class="event-description">Join us for the biggest tech conference of the year, featuring renowned
-                  speakers and cutting-edge demonstrations.</p>
-                <p class="event-time"><i class="bi bi-clock"></i> 9:00 AM - 5:00 PM</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <?php
+        if (mysqli_num_rows($result) > 0) {
+          // Loop through the events
+          while ($event = mysqli_fetch_assoc($result)) {
+            $eventDate = strtotime($event['event_date']);
+            $day = date('d', $eventDate);
+            $month = strtoupper(date('M', $eventDate));
 
-        <div class="event-card">
-          <div class="row g-0">
-            <div class="col-md-3 col-sm-4">
-              <div class="event-date d-flex align-items-center justify-content-center h-100">
-                <div>
-                  <div class="fs-2">22</div>
-                  <div class="fs-2">JUN</div>
+            // Convert the event_time to 12-hour format with am/pm
+            $eventTime = date('g:i A', strtotime($event['event_time']));
+        ?>
+            <div class="event-card">
+              <div class="row g-0">
+                <div class="col-md-3 col-sm-4">
+                  <div class="event-date d-flex align-items-center justify-content-center h-100">
+                    <div>
+                      <div class="fs-2"><?= $day; ?></div>
+                      <div class="fs-2"><?= $month; ?></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-9 col-sm-8">
+                  <div class="event-info">
+                    <h2 class="event-title"><?= htmlspecialchars($event['title']); ?></h2>
+                    <p class="event-description"><?= htmlspecialchars($event['description']); ?></p>
+                    <p class="event-time"><i class="bi bi-clock"></i> <?= $eventTime; ?></p>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-9 col-sm-8">
-              <div class="event-info">
-                <h2 class="event-title">Summer Music Festival</h2>
-                <p class="event-description">Experience a day filled with live performances from top artists across
-                  various genres.</p>
-                <p class="event-time"><i class="bi bi-clock"></i> 2:00 PM - 11:00 PM</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="event-card">
-          <div class="row g-0">
-            <div class="col-md-3 col-sm-4">
-              <div class="event-date d-flex align-items-center justify-content-center h-100">
-                <div>
-                  <div class="fs-2">10</div>
-                  <div class="fs-2">JUL</div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-9 col-sm-8">
-              <div class="event-info">
-                <h2 class="event-title">Art Exhibition Opening</h2>
-                <p class="event-description">Be among the first to view a stunning collection of contemporary art from
-                  local and international artists.</p>
-                <p class="event-time"><i class="bi bi-clock"></i> 7:00 PM - 10:00 PM</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <?php
+          }
+        } else {
+          echo "<p class='text-center'>No upcoming events found.</p>";
+        }
+        // Close the connection
+        mysqli_close($conn);
+        ?>
       </div>
     </div>
   </main>
+
+
   <?php include_once "includes/footer.php"; ?>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function (event) {
+    document.addEventListener("DOMContentLoaded", function(event) {
       navActivePage();
     });
-
   </script>
 
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID 

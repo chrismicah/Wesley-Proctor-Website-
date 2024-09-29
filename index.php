@@ -18,6 +18,7 @@
   <link href="css/main.a3f694c0.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="css/custom.css">
+  
 </head>
 
 <body>
@@ -112,7 +113,7 @@
   <!-- Testimonials Section -->
   <div class="container mt-5 mb-5">
     <div class="row g-2">
-      <div class="col-md-4">
+      <div class="col-md-4" data-aos="fade-up-left">
         <div class="card p-3 text-center px-4">
           <div class="user-image">
             <img src="assets/images/Brian_Westbrook_Philly_HOF_(cropped_1).jpg" class="rounded-circle" alt="Brian Westbrook" width="80">
@@ -132,7 +133,7 @@
       </div>
 
       <div class="col-md-4">
-        <div class="card p-3 text-center px-4">
+        <div class="card p-3 text-center px-4" data-aos="fade-up-left">
           <div class="user-image">
             <img src="assets/images/jumaine jones 4.jpg" class="rounded-circle" alt="Jumaine Jones" width="80">
           </div>
@@ -152,7 +153,7 @@
       </div>
 
       <div class="col-md-4">
-        <div class="card p-3 text-center px-4">
+        <div class="card p-3 text-center px-4" data-aos="fade-up-left">
           <div class="user-image">
             <img src="https://i.imgur.com/ACeArwY.jpg" class="rounded-circle" alt="Veera Duncan" width="80">
           </div>
@@ -191,8 +192,8 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({
-      duration: 300, // Animation speed in milliseconds
-      delay: 300, // Delay before the animation starts in milliseconds
+      // duration: 300, // Animation speed in milliseconds
+      delay: 100, // Delay before the animation starts in milliseconds
     });
   </script>
 
