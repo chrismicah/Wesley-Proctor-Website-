@@ -17,8 +17,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap-grid.min.css" integrity="sha512-i1b/nzkVo97VN5WbEtaPebBG8REvjWeqNclJ6AItj7msdVcaveKrlIIByDpvjk5nwHjXkIqGZscVxOrTb9tsMA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="css/main.a3f694c0.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
   <link rel="stylesheet" href="css/custom.css">
-  
+
 </head>
 
 <body>
@@ -112,69 +115,62 @@
 
   <!-- Testimonials Section -->
   <div class="container mt-5 mb-5">
-    <div class="row g-2">
-      <div class="col-md-4" data-aos="fade-up-left">
-        <div class="card p-3 text-center px-4">
-          <div class="user-image">
-            <img src="assets/images/Brian_Westbrook_Philly_HOF_(cropped_1).jpg" class="rounded-circle" alt="Brian Westbrook" width="80">
-          </div>
-          <div class="user-content">
-            <h5 class="mb-0">Brian Westbrook</h5>
-            <span>Software Developer</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          </div>
-          <div class="ratings">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-          </div>
+    <div class="testimonial-slider owl-carousel owl-theme">
+      <div class="testimonial-item">
+        <div class="user-image">
+          <img src="assets/images/Brian_Westbrook_Philly_HOF_(cropped_1).jpg" alt="Brian Westbrook">
+        </div>
+        <div class="user-content">
+          <h5>Brian Westbrook</h5>
+          <span>Software Developer</span>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <div class="ratings">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
         </div>
       </div>
-
-      <div class="col-md-4">
-        <div class="card p-3 text-center px-4" data-aos="fade-up-left">
-          <div class="user-image">
-            <img src="assets/images/jumaine jones 4.jpg" class="rounded-circle" alt="Jumaine Jones" width="80">
-          </div>
-          <div class="user-content">
-            <h5 class="mb-0">Jumaine Jones</h5>
-            <span>Web Developer</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          </div>
-          <div class="ratings">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-          </div>
+      <div class="testimonial-item">
+        <div class="user-image">
+          <img src="assets/images/jumaine jones 4.jpg" alt="Jumaine Jones">
+        </div>
+        <div class="user-content">
+          <h5>Jumaine Jones</h5>
+          <span>Web Developer</span>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <div class="ratings">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
         </div>
       </div>
-
-      <div class="col-md-4">
-        <div class="card p-3 text-center px-4" data-aos="fade-up-left">
-          <div class="user-image">
-            <img src="https://i.imgur.com/ACeArwY.jpg" class="rounded-circle" alt="Veera Duncan" width="80">
-          </div>
-          <div class="user-content">
-            <h5 class="mb-0">Veera Duncan</h5>
-            <span>Software Architect</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          </div>
-          <div class="ratings">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-          </div>
+      <div class="testimonial-item">
+        <div class="user-image">
+          <img src="https://i.imgur.com/ACeArwY.jpg" alt="Veera Duncan">
+        </div>
+        <div class="user-content">
+          <h5>Veera Duncan</h5>
+          <span>Software Architect</span>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <div class="ratings">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
         </div>
       </div>
     </div>
   </div>
 
+
   <!-- About Us Section -->
-  <div class="section-container background-color-container white-text-container">
+  <div class="section-container background-color-container white-text-container d-none">
     <div class="row">
       <div class="col-xs-12">
         <div class="text-center">
@@ -197,6 +193,33 @@
     });
   </script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $(".testimonial-slider").owlCarousel({
+        items: 1,
+        loop: true,
+        nav: true,
+        navText: ['<i class="fas fa-chevron-left"></i>', '<i class="fas fa-chevron-right"></i>'],
+        dots: false,
+        autoplay: true,
+        autoplayTimeout: 2000,
+        autoplayHoverPause: true,
+        responsive: {
+          0: {
+            items: 1
+          },
+          600: {
+            items: 1
+          },
+          1000: {
+            items: 1
+          }
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

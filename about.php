@@ -13,6 +13,7 @@
   <link href="./assets/favicon.ico" rel="icon" />
   <title>W.P. Enterprise</title>
   <link href="css/main.a3f694c0.css" rel="stylesheet" />
+  <link href="css/custom.css" rel="stylesheet" />
 </head>
 <body>
   <!-- Add your content of header -->

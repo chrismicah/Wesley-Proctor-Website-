@@ -24,6 +24,7 @@ include_once("config.php");
     integrity="sha512-i1b/nzkVo97VN5WbEtaPebBG8REvjWeqNclJ6AItj7msdVcaveKrlIIByDpvjk5nwHjXkIqGZscVxOrTb9tsMA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    
 
   <title>W.P. Enterprise</title>
   <style>

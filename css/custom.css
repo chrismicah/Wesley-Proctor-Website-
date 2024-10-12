@@ -1,6 +1,7 @@
-body{
+body {
     overflow-x: hidden;
 }
+
 .d-flex {
     display: flex;
 }
@@ -44,9 +45,11 @@ body{
     width: 70px;
     height: 70px;
 
-}/* General Footer Styles */
+}
+
+/* General Footer Styles */
 .footer-container {
-    background-color: #2c3e50;
+    background-image: linear-gradient(90deg, #1e90ff 0, #0000ff);
     color: #ffffff;
     padding: 40px 0;
     font-family: 'Arial', sans-serif;
@@ -135,6 +138,82 @@ body{
 
 .text-center {
     text-align: center;
+}
+
+.testimonial-slider {
+    position: relative;
+    padding: 0 50px;
+}
+
+.testimonial-item {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
+}
+
+.user-image img,
+.owl-carousel .owl-item img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: auto;
+    margin-bottom: 15px;
+    object-fit: cover;
+}
+
+.user-content h5 {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.user-content span {
+    display: block;
+    margin-bottom: 10px;
+    color: #6c757d;
+}
+
+.ratings {
+    color: #ffc107;
+    margin-top: 10px;
+}
+
+.owl-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    left: 0;
+    transform: translateY(-50%);
+}
+
+.owl-prev,
+.owl-next {
+    position: absolute;
+    font-size: 24px;
+    color: #007bff;
+    background: none;
+    border: none;
+}
+
+.owl-prev {
+    left: -40px;
+}
+
+.owl-next {
+    right: -40px;
+}
+
+.owl-carousel .owl-nav button.owl-next,
+.owl-carousel .owl-nav button.owl-prev,
+.owl-carousel button.owl-dot {
+    background-image: linear-gradient(90deg, #1e90ff 0, #0000ff);
+    color: white;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
 }
 
 /* Responsive Adjustments */
