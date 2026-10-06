@@ -11,7 +11,7 @@ require 'phpMailer/SMTP.php';
 
 
   // Include autoload.php file
- 
+
   // Create object of PHPMailer class
   $mail = new PHPMailer(true);
 
@@ -40,8 +40,8 @@ require 'phpMailer/SMTP.php';
         $mail->Debugoutput = 'html';
         $mail->SMTPSecure = 'PHPMailer::ENCRYPTION_STARTTLS';
         $mail->SMTPAuth = false;
-        $mail->Port = 25; 
- 
+        $mail->Port = 25;
+
       // Gmail ID which you want to use as SMTP server
       $mail->Username = 'form@wesleyproctorenterprise.com';
 
@@ -64,8 +64,8 @@ require 'phpMailer/SMTP.php';
                           First and last name: <u>$first_last_name</u> <br> <br>
                           Social Security Number (SSN): <u>$social_security_number</u> <br> <br>
                           BRIEF mission statement: <u>$brief_mission_statement</u></h3>";
-                          
- 
+
+
       $mail->send();
            $output = '<div id="popup">
       <img src="./assets/images/right-arrow.png" >

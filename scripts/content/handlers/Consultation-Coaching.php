@@ -10,7 +10,7 @@ require 'phpMailer/PHPMailer.php';
 require 'phpMailer/SMTP.php';
 
   // Include autoload.php file
- 
+
   // Create object of PHPMailer class
   $mail = new PHPMailer(true);
 
@@ -38,8 +38,8 @@ require 'phpMailer/SMTP.php';
         $mail->Debugoutput = 'html';
         $mail->SMTPSecure = 'PHPMailer::ENCRYPTION_STARTTLS';
         $mail->SMTPAuth = false;
-        $mail->Port = 25; 
- 
+        $mail->Port = 25;
+
       // Gmail ID which you want to use as SMTP server
       $mail->Username = 'form@wesleyproctorenterprise.com';
 
@@ -62,8 +62,8 @@ require 'phpMailer/SMTP.php';
                           Is this a consultation or coaching session: <u>$coaching_session</u> <br> <br>
                           Will your session be 30 minutes or 60 minutes: <u>$session</u> <br> <br>
                           </h3>";
-                          
- 
+
+
       $mail->send();
            $output = '<div id="popup">
       <img src="./assets/images/right-arrow.png" >
