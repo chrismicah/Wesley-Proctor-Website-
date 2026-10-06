@@ -1,0 +1,10 @@
+.context/
+node_modules/
+.DS_Store
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+site.tar.gz
+wpe-config.php

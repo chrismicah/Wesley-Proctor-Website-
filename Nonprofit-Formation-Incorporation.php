@@ -11,20 +11,24 @@ require 'phpMailer/SMTP.php';
 
 
   // Include autoload.php file
- 
+
   // Create object of PHPMailer class
   $mail = new PHPMailer(true);
 
   $output = '';
 
   if (isset($_POST['submit'])) {
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $nonprofit_organization = $_POST['nonprofit_organization'];
-    $mailing_address = $_POST['mailing_address'];
-    $first_last_name = $_POST['first_last_name'];
-    $social_security_number = $_POST['social_security_number'];
-    $brief_mission_statement = $_POST['brief_mission_statement'];
+    $email = is_string($_POST['email'] ?? null) ? trim($_POST['email']) : '';
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        http_response_code(422);
+        $output = '<div class="form-status" role="alert">Please provide a valid email address.</div>';
+    } else {
+    $phone = htmlspecialchars(is_string($_POST['phone'] ?? null) ? trim($_POST['phone']) : '', ENT_QUOTES, 'UTF-8');
+    $nonprofit_organization = htmlspecialchars(is_string($_POST['nonprofit_organization'] ?? null) ? trim($_POST['nonprofit_organization']) : '', ENT_QUOTES, 'UTF-8');
+    $mailing_address = htmlspecialchars(is_string($_POST['mailing_address'] ?? null) ? trim($_POST['mailing_address']) : '', ENT_QUOTES, 'UTF-8');
+    $first_last_name = htmlspecialchars(is_string($_POST['first_last_name'] ?? null) ? trim($_POST['first_last_name']) : '', ENT_QUOTES, 'UTF-8');
+    // Sensitive identifiers are collected separately, not by this inquiry form.
+    $brief_mission_statement = htmlspecialchars(is_string($_POST['brief_mission_statement'] ?? null) ? trim($_POST['brief_mission_statement']) : '', ENT_QUOTES, 'UTF-8');
 
     try {
         $mail->SMTPDebug = 0;
@@ -40,16 +44,16 @@ require 'phpMailer/SMTP.php';
         $mail->Debugoutput = 'html';
         $mail->SMTPSecure = 'PHPMailer::ENCRYPTION_STARTTLS';
         $mail->SMTPAuth = false;
-        $mail->Port = 25; 
- 
+        $mail->Port = 25;
+
       // Gmail ID which you want to use as SMTP server
       $mail->Username = 'form@wesleyproctorenterprise.com';
-      // Gmail Password
-      $mail->Password = 'dr.proctor54321';
+
+
       $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
 
       // Email ID from which you want to send the email
-      $mail->setFrom($email);
+      $mail->setFrom('form@wesleyproctorenterprise.com', 'Wesley Proctor Enterprise');
       // Recipient Email ID where you want to receive emails
       $mail->addAddress('form@wesleyproctorenterprise.com');
        $mail->addReplyTo($email);
@@ -62,234 +66,53 @@ require 'phpMailer/SMTP.php';
                           Nonprofit organization: <u>$nonprofit_organization</u> <br> <br>
                           Mailing address: <u>$mailing_address</u> <br> <br>
                           First and last name: <u>$first_last_name</u> <br> <br>
-                          Social Security Number (SSN): <u>$social_security_number</u> <br> <br>
                           BRIEF mission statement: <u>$brief_mission_statement</u></h3>";
-                          
- 
-      $mail->send();
-           $output = '<div id="popup">
-      <img src="./assets/images/right-arrow.png" >
-      <img src="./assets/images/close.png" class="close-btn">
-      <h2>Thank you</h2>
-      <p>Form has been successfully submitted.</p>
-    </div>
-    <script>
-    var popup = document.querySelector("#popup").classList.add("active");
-    const close_btn = document.querySelector(".close-btn");
-    close_btn.addEventListener("click", () => {
-    var popup = document.querySelector("#popup");
-    popup.classList.remove("active");
-})
 
-    </script>
-    ';
+
+      $mail->send();
+           $output = '<div class="form-status" role="status">Thank you. Your form has been successfully submitted.</div>';
      }  catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    http_response_code(503);
+    $output = '<div class="form-status" role="alert">Your request could not be sent. Please <a href="./contact.html">email or call our team</a>.</div>';
+    error_log('WPE form delivery failed: ' . $mail->ErrorInfo);
 }
+    }
   }
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Nonprofit formation with Dr. Wesley Proctor."><meta name="theme-color" content="#173f42"><title>Nonprofit formation | Wesley Proctor Enterprise</title><link rel="icon" href="./assets/favicon.ico"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="./assets/site.css"><script src="./assets/site.js" defer></script></head><body data-wpe-version="2"><a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap header-inner">
+<a class="brand" href="./index.html" aria-label="Wesley Proctor Enterprise home"><img class="brand-logo" src="./assets/images/WPE%20Logo%20(1).jpeg" width="62" height="45" alt=""><span class="brand-name">Wesley Proctor<small>Enterprise</small></span></a>
+<button class="menu-button" type="button" aria-controls="site-navigation" aria-expanded="false">Menu +</button>
+<nav class="site-nav" id="site-navigation" aria-label="Main navigation">
+<a href="./about.html">Meet Dr. Proctor</a>
+<details class="nav-details"><summary>Our services</summary><div class="nav-dropdown"><a href="./Nonprofit-Formation-Incorporation.php">Nonprofit formation</a><a href="./For-profit-Business-Formation.php">Business formation</a><a href="./Consultation-Coaching.php">Consultation &amp; coaching</a><a href="./Workshops-Trainings.php">Workshops &amp; training</a></div></details>
+<details class="nav-details"><summary>Book Dr. Proctor</summary><div class="nav-dropdown"><a href="./speaking-engagement-form.php">Speaking engagements</a><a href="./workshop-seminar-training-form.php">Workshop & seminar booking</a></div></details>
+<a href="./payment.html">Make a payment</a><a class="nav-cta" href="./contact.html">Let’s talk <span aria-hidden="true">↗</span></a></nav></div></header><main id="main"><section class="page-hero"><div class="wrap"><div class="breadcrumb"><a href="./index.html">Home</a><span aria-hidden="true">/</span><span>Nonprofit formation</span></div><p class="eyebrow">Nonprofit formation</p><h1>Nonprofit formation</h1><p>Wesley Proctor Enterprise</p></div></section><section class="section"><div class="wrap content-grid"><article class="service-overview"><p class="note" style="padding-bottom: 0;">(WPE) will walk you through the step-by-step process of forming your nonprofit organization.This includes:</p><p class="note">If you are interested in establishing a nonprofit organization, please complete and submit the questionnaire below. Dr. Proctor or a WPE staff member will be in touch with you to schedule a follow-up meeting for next steps.</p><ul class="numberlist">
+<li><p>Choosing a business name that is legally available in your state</p> </li>
+<li><p>File for an Employer Identification Number (EIN)</p></li>
+<li><p>Prepare and file your articles of incorporation with your state's corporate filing office (state fees required)</p></li>
+<li><p>Create bylaws that will dictate how the corporation will be operated.</p></li>
+<li class="last-li"><p>Apply for any licenses or permits that your corporation will need to operate in your state and local municipality.</p></li>
+</ul></article><div class="form-panel"><h2>NONPROFIT QUESTIONNAIRE!</h2><?php echo $output; ?><form action="" class="inquiry-form" method="post">
+<div class="field"><label for="text">1. Please provide your email.</label><input autocomplete="email" class="form-control" id="text" maxlength="1000" name="email" required="" type="email"/></div>
 
-<head>
-  <meta charset="UTF-8">
-  <meta content="IE=edge" http-equiv="X-UA-Compatible">
-  <meta content="width=device-width,initial-scale=1" name="viewport">
-  <meta content="description" name="description">
-  <meta name="google" content="notranslate" />
-  <meta content="Mashup templates have been developped by Orson.io team" name="author">
+<div class="field"><label for="text-2">2. Please provide your phone number.</label><input autocomplete="tel" class="form-control" id="text-2" maxlength="1000" name="phone" required="" type="tel"/></div>
 
-  <!-- Disable tap highlight on IE -->
-  <meta name="msapplication-tap-highlight" content="no">
-  
-  <link href="./assets/apple-touch-icon.png" rel="apple-touch-icon">
-  <link href="./assets/favicon.ico" rel="icon">
+<div class="field"><label for="text-3">3. Please provide the name of your nonprofit organization.</label><input class="form-control" id="text-3" maxlength="1000" name="nonprofit_organization" required="" type="text"/></div>
 
- 
+<div class="field"><label for="text-4">4. Please provide the complete mailing address of your nonprofit organization (this address can be your home address but cannot be a P.O. Box).</label><input class="form-control" id="text-4" maxlength="1000" name="mailing_address" required="" type="text"/></div>
 
-  <title>W.P. Enterprise</title>  
-
-<link href="./main.a3f694c0.css" rel="stylesheet">
-</head>
-<style>
-
-</style>
-<body>
-    
- <!-- Add your content of header -->
- <header>
-    <nav class="navbar  navbar-fixed-top navbar-default">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle uarr collapsed" data-toggle="collapse" data-target="#navbar-collapse-uarr">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="./index.html" title="">
-            <img src="./assets/images/WPE Logo _new - Copy.jpeg" class="navbar-logo-img" alt="">
-          </a>
-        </div>
-  
-        <div class="collapse navbar-collapse" id="navbar-collapse-uarr">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="./index.html" title="" class="active">Home</a></li>          
-            <li><a href="./about.html" title=""> About Dr. Proctor</a></li>
-            <li class="dropdown">
-              <a class="dropbtn">Services</a>
-              <div class="dropdown-content">
-                <a href="./Nonprofit-Formation-Incorporation.php">Nonprofit Formation/Incorporation</a>
-                <a href="./For-profit-Business-Formation.php">For-profit Business Formation</a>
-                <a href="./Consultation-Coaching.php">Consultation/Coaching</a>
-                <a href="./Workshops-Trainings.php">Workshops/Trainings</a>
-              </div>
-            </li>
-            <li class="dropdown">
-              <a class="dropbtn">Book Dr. Proctor </a>
-              <div class="dropdown-content">
-                  <a href="./speaking-engagement-form.php">Speaking Engagement</a>
-                  <a href="./workshop-seminar-training-form.php">Workshop/Seminar Training</a>
-                </div>
-            </li>
-            <li><a href="./payment.html">Payment</a></li>
-            <li><a href="./courses-trainings.html" title="">Courses/Training</a></li>
-              </li>
-              <li><a href="./products.html">Products</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
-
-  <main id="main">
- <?php echo $output; ?>
-  <div class="container">
-  <h1 class="list">Nonprofit Formation/Incorporation </h1>
-   <p class="note " style="padding-bottom: 0;">(WPE) will walk you through the step-by-step process of forming your nonprofit organization.This includes:</p>
-  <ul class="numberlist">
-    <li><p>Choosing a business name that is legally available in your state</p> </li>
-    <li><p>File for an Employer Identification Number (EIN)</p></li>
-    <li><p>Prepare and file your articles of incorporation with your state's corporate filing office (state fees required)</p></li>
-    <li><p>Create bylaws that will dictate how the corporation will be operated.</p></li>
-    <li class="last-li"><p>Apply for any licenses or permits that your corporation will need to operate in your state and local municipality.</p></li>
-  </ul>
-  <p class="note">If you are interested in establishing a nonprofit organization, please complete and submit the questionnaire below. Dr. Proctor or a WPE staff member will be in touch with you to schedule a follow-up meeting for next steps.</p>
-  </div>
- 
-  <div class="container">
-    <div class="form-box">
-      <div class="text">
-          <h2>NONPROFIT QUESTIONNAIRE!</h2>
-          <p>Please provide the following information:</p>
-      </div>
-      <form action="" method="post">
-           <label for="text">1. Please provide your email.</label><br>
-           <input type="email" name="email" id="text" required> <br><br>
-           <label for="text-2">2. Please provide your phone number.</label><br>
-           <input type="phone" name="phone" id="text-2" required> <br><br> 
-           <label for="text-3">3. Please provide the name of your nonprofit organization.</label><br>
-           <input type="text" name="nonprofit_organization" id="text-3" required> <br><br>
-           <label for="text-4">4. Please provide the complete mailing address of your nonprofit organization (this address can be your home address but cannot be a P.O. Box).</label><br>
-           <input type="text" name="mailing_address" id="text-4" required> <br><br>
-           <label for="text-5">5. Please provide the first and last name of the person who will serve as the main contact of the newly formed 501c3? (Please provide me with how their name should appear on all 501c3 documents.)</label><br>
-           <input type="text" name="first_last_name" id="text-5" required> <br><br>
-           <label for="text-6">6. Please provide the Social Security Number (SSN) of the person listed above in #3. Your (SSN) should match how your first and last name appears on your individual tax returns. We will need your (SSN) number once and only once to obtain your Employer Identification Number (EIN) from the IRS which we will obtain through the IRS business portal. We will not keep your (SSN) number or store it anywhere!</label><br>
-           <input type="text" name="social_security_number" id="text-6" required><br><br>
-           <label for="text-7">7. Please provide a BRIEF mission statement for the nonprofit organization. This statement should be no more than (2) sentences about what the organization does. Your mission statement does not have to be perfect but should provide a general overview of what your nonprofit organization is all about. (If you need a sample to refer to, please write "NEED SAMPLE").</label><br>
-           <input type="text" name="brief_mission_statement" id="text-7" required> <br><br>
-           <input type="submit" name="submit" value="submit" id="submit">
-      </form>
-      
-  </div>
-  </div>
-  </main>
-  
+<div class="field"><label for="text-5">5. Please provide the first and last name of the person who will serve as the main contact of the newly formed 501c3? (Please provide me with how their name should appear on all 501c3 documents.)</label><input class="form-control" id="text-5" maxlength="1000" name="first_last_name" required="" type="text"/></div>
 
 
-<footer>
-    <div class="section-container footer-container">
-        <div class="container">
-            <div class="row">
-                    <div class="col-md-4">
-                        <h4>Follow Us!</h4>
-<p><b id="docs-internal-guid-62ef645a-7fff-2554-0f63-2fddd702e798"><a href="https://www.instagram.com/drwesleyproctor/?igshid=NDRkN2NkYzU%3D"><img style="height: 50px; width: 50px; " src="./logo-ig-png-32473.png"></a></b></p>
-                        
-                    </div>
 
-                    <div class="col-md-4">
-                        <h4>Contact Us</h4>
-                        <p>Phone:<a style="color: blue;" href="tel:4848366444">484-836-6444</a></p>
+<div class="field"><label for="text-7">7. Please provide a BRIEF mission statement for the nonprofit organization. This statement should be no more than (2) sentences about what the organization does. Your mission statement does not have to be perfect but should provide a general overview of what your nonprofit organization is all about. (If you need a sample to refer to, please write "NEED SAMPLE").</label><input class="form-control" id="text-7" maxlength="1000" name="brief_mission_statement" required="" type="text"/></div>
 
-                        <p>Email:<a style="color: blue;" href="mailto:wesleyproctorenterprise@gmail.com">wesleyproctorenterprise@gmail.com</a></p>
-                        <p>
-                           
-                        </p>
-                    </div>
-
-                    <div class="col-md-4">
-                        <h4>Subscribe to newsletter</h4>
-                        
-                        <div class="form-group">
-                            <div class="input-group">
-                                <input type="text" class="form-control footer-input-text">
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-primary btn-newsletter ">OK</button>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-            </div>
-        </div>
-    </div>
-</footer>
-<script>
-  const eamil = document.getElementById('text-01');
-  const regexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-if (!eamil.value.match(regexp)) {
-// on error, we get into the condition
-    // this.classList.add('error');
-    console.log('error')
-}
-</script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function (event) {
-    navActivePage();
-  });
-  const menu = document.querySelector('.dropdown-link');
-  const dp_menu = document.querySelector('.dropdown-menu-1');
-  menu.addEventListener('mouseenter', (e) => {
-
-    dp_menu.classList.toggle('active');
-  })
-</script>
-
-<!-- Google Analytics: change UA-XXXXX-X to be your site's ID 
-
-<script>
-  (function (i, s, o, g, r, a, m) {
-    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-      (i[r].q = i[r].q || []).push(arguments)
-    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-      m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-  ga('create', 'UA-XXXXX-X', 'auto');
-  ga('send', 'pageview');
-</script>
-
--->
-     <script type="text/javascript">
-if(window.history.replaceState){
-      window.history.replaceState(null, null, window.location.href);
-    }
-  </script>
-
-<script type="text/javascript" src="./main.41beeca9.js"></script></body>
-
-</html>
-<form action="send_form_mail.php" method="post">
-<input type="hidden" name="form_type" value="nonprofit_organization">
+<input class="btn" id="submit" name="submit" type="submit" value="Submit request"/>
+</form><p class="form-note">Prefer a conversation? <a href="./contact.html">Email or call our team.</a></p><p class="form-note">Please do not include Social Security numbers in this inquiry. Any sensitive filing details will be arranged separately.</p></div></div></section></main><footer class="site-footer"><div class="wrap"><div class="footer-grid"><div>
+<a class="brand" href="./index.html"><img class="brand-logo" src="./assets/images/WPE%20Logo%20(1).jpeg" width="62" height="45" alt=""><span class="brand-name">Wesley Proctor<small>Enterprise</small></span></a><p class="footer-description">Helping people turn their purpose into organizations that make a difference.</p></div>
+<div><p class="eyebrow footer-label">Explore</p><div class="footer-links"><a href="./about.html">Meet Dr. Proctor</a><a href="./index.html#services">Our services</a><a href="./speaking-engagement-form.php">Speaking & booking</a><a href="./calendar.html">Calendar</a><a href="./courses-trainings.html">Courses & resources</a><a href="./products.html">Products</a><a href="./payment.html">Make a payment</a></div></div>
+<div><p class="eyebrow footer-label">Get in touch</p><div class="footer-links"><a href="mailto:wesleyproctorenterprise@gmail.com">wesleyproctorenterprise@gmail.com</a><a href="tel:4848366444">484-836-6444</a><a href="https://www.instagram.com/drwesleyproctor/" target="_blank" rel="noopener noreferrer">Follow Dr. Proctor on Instagram ↗</a></div></div></div>
+<div class="footer-bottom"><span>© 2026 Wesley Proctor Enterprise, LLC</span><span>Business & education development.</span></div></div></footer></body></html>
