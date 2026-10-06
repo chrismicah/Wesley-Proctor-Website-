@@ -1,0 +1,54 @@
+name: Check and deploy website
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Check PHP syntax
+        run: python3 scripts/check-site.py
+      - name: Test inquiry handlers without sending mail
+        run: python3 -m unittest discover -s tests -p 'test_*.py'
+      - name: Verify deployment package
+        run: python3 scripts/package-site.py --output /tmp/site.tar.gz
+  deploy:
+    needs: check
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.GODADDY_DEPLOY_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: godaddy-production
+    concurrency:
+      group: godaddy-production
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Package website
+        run: python3 scripts/package-site.py --output /tmp/site.tar.gz
+      - name: Deploy with backup and verified SSH identity
+        env:
+          GODADDY_HOST: ${{ secrets.GODADDY_HOST }}
+          GODADDY_USER: ${{ secrets.GODADDY_USER }}
+          GODADDY_SSH_KEY: ${{ secrets.GODADDY_SSH_KEY }}
+          GODADDY_KNOWN_HOSTS: ${{ secrets.GODADDY_KNOWN_HOSTS }}
+          GODADDY_PATH: ${{ vars.GODADDY_PATH }}
+        run: bash scripts/deploy-godaddy.sh /tmp/site.tar.gz
+      - name: Verify deployed homepage
+        run: |
+          curl --fail --silent --show-error --retry 3 https://wesleyproctorenterprise.com/ -o /tmp/live.html
+          grep -F 'data-wpe-version="2"' /tmp/live.html
+          curl --fail --silent --show-error --retry 3 "https://wesleyproctorenterprise.com/assets/deployment.json?revision=$GITHUB_SHA" -o /tmp/release.json
+          python3 -c 'import json, os; assert json.load(open("/tmp/release.json"))["commit"] == os.environ["GITHUB_SHA"], "Live site revision does not match this deployment"'
+          for path in about.html Consultation-Coaching.php payment.html assets/site.css assets/site.js; do
+            curl --fail --silent --show-error --retry 3 "https://wesleyproctorenterprise.com/$path" -o /dev/null
+          done
